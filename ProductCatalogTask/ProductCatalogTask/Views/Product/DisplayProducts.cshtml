@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning mt-5">
+        <h4 class="alert-heading">Not Found Product!</h4>
+        <p class="mb-0"> Not Added Product Yet</p>
+    </div>
+}
+else
+{
+    <div class="row mt-5">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <a class="card border-success mb-3 text-decoration-none rounded-3 overflow-hidden" asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">
+                    <div class="card-body card-image-body" style="background-image:url(@($"{FileSettings.imagesPath}/{product.Image}")); ">
+                        <div class="d-flex align-items-end h-100">
+                            <span class="badge rounded-pill bg-success fs-3">@product.Category.Name</span>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                        <h5>@product.Name</h5>
+                        <div>
+                            $@product.Price
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+}
+
+

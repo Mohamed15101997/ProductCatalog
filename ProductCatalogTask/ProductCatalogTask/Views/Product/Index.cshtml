@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Products";
+}
+<a asp-action="Create" class="btn btn-primary">Add New Product <i class="bi bi-plus-circle"></i></a>
+@if (!Model.Any())
+{
+    <div class="alert alert-warning mt-5">
+        <h4 class="alert-heading">Not Found Product!</h4>
+        <p class="mb-0"> Not Added Product Yet</p>
+    </div>
+}
+else
+{
+    <div class="mt-5">
+        <table class="table table-hover">
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex">
+                                <div class="pe-4">
+                                    <img src="@($"{FileSettings.imagesPath}/{product.Image}")" alt="@product.Name" style="max-width:90px" />
+                                </div>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h4 class="text-primary">@product.Name</h4>
+                                    <h5>@product.Category.Name</h5>
+                                    <p>Creation Date @product.CreationDate</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6>Created By : @product.UserId</h6>
+                                    <h6>Start Date : @product.StartDate</h6>
+                                    <h6>Duration : @product.Duration Days</h6>
+                                    <h6>Price : $@product.Price</h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="d-flex justify-content-end">
+                                <a asp-action="Edit" asp-route-id="@product.Id" class="btn btn-info text-white rounded rounded-3 me-2">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a class="btn btn-danger rounded rounded-3 js-delete" data-id="@product.Id">
+                                    <i class="bi bi-trash-fill"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+}
+@section Scripts {
+	<script src="~/js/product-delete.js"></script>
+}
+

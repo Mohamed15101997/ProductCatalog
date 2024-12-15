@@ -1,0 +1,22 @@
+﻿@model Product
+@{
+	ViewData["Title"] = Model.Name;
+}
+<div class="card border-success rounded-4 mt-5 overflow-hidden">
+	<div class="card-body p-0">
+		<div class="row">
+			<div class="col-md-8 p-5 d-flex flex-column justify-content-between">
+				<div>
+					<h1 class="text-primary fw-bolder">@Model.Name</h1>
+					<span class="badge bg-success fs-5 mb-4">@Model.Category?.Name</span>
+				</div>
+				<div class="text-primary">
+					<h3>$@Model.Price</h3>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<img class="w-100" src="@($"{FileSettings.imagesPath}/{Model.Image}")" alt="@Model.Name" style="height:100%;" />
+			</div>
+		</div>
+	</div>
+</div>
